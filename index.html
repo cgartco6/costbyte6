@@ -1,0 +1,3284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SynthAI Pro - Advanced AI Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #0ea5e9;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f1f5f9;
+            --gray: #64748b;
+            --gray-light: #cbd5e1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient: linear-gradient(135deg, var(--primary), var(--primary-light));
+            --gradient-dark: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .header-scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--darker);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #0da0e0;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background: var(--gray-light);
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.75rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Dashboard Menu */
+        .dashboard-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            box-shadow: var(--shadow-xl);
+            transition: left 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .dashboard-menu.active {
+            left: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .menu-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .menu-close {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .menu-close:hover {
+            color: var(--gray-light);
+        }
+
+        .menu-user {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .user-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .user-role {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .menu-nav {
+            padding: 1.5rem 0;
+            flex-grow: 1;
+        }
+
+        .menu-nav ul {
+            list-style: none;
+        }
+
+        .menu-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .menu-nav a:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .menu-nav a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-nav a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .menu-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 10rem 2rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="rgba(30,58,138,0.8)"/><path d="M0 0L100 100M100 0L0 100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            background-size: 200px;
+            opacity: 0.3;
+        }
+
+        .hero-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: overlay;
+            opacity: 0.2;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--gray-light);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .feature-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: 0.75rem;
+        }
+
+        /* AI Demo Section */
+        .ai-demo {
+            background: var(--darker);
+            color: white;
+            border-radius: 2rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: 150px;
+        }
+
+        .ai-demo-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .demo-interface {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .demo-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-family: inherit;
+        }
+
+        .demo-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .demo-output {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            min-height: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-light);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .chat-info h3 {
+            margin-bottom: 0.25rem;
+        }
+
+        .chat-status {
+            color: var(--success);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.5rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+        }
+
+        .message-user {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message-bot {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .message-sender {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .message-content {
+            line-height: 1.5;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.5rem;
+            font-family: inherit;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: white;
+        }
+
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid var(--gray-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--darker);
+        }
+
+        .pricing-description {
+            color: var(--gray);
+        }
+
+        .pricing-price {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--darker);
+            line-height: 1;
+        }
+
+        .price-period {
+            color: var(--gray);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .pricing-feature {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .pricing-feature i {
+            color: var(--success);
+            margin-top: 0.25rem;
+        }
+
+        .pricing-actions {
+            margin-top: auto;
+        }
+
+        /* Shopping Cart */
+        .cart-container {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: white;
+            box-shadow: var(--shadow-xl);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-container.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .cart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .cart-close:hover {
+            color: var(--dark);
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .cart-item-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-light);
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .author-role {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            border-radius: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><polygon points="0,0 100,100 0,100" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 200px;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1002;
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--success);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Forms */
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-light);
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--darker);
+            text-align: center;
+        }
+
+        .form-subtitle {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--darker);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .form-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1003;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--dark);
+        }
+
+        /* Admin Dashboard */
+        .dashboard {
+            padding-top: 8rem;
+            min-height: 100vh;
+            background: var(--light);
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .dashboard-subtitle {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-light);
+            text-align: center;
+        }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .stat-card-label {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .dashboard-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-light);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--darker);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .dashboard-section-title i {
+            color: var(--primary);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .dashboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .dashboard-table th,
+        .dashboard-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .dashboard-table th {
+            font-weight: 600;
+            color: var(--darker);
+            background: var(--light);
+        }
+
+        .dashboard-table tr:hover {
+            background: var(--light);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        /* AI Tools */
+        .ai-tools {
+            display: none;
+            padding-top: 8rem;
+            min-height: 100vh;
+            background: var(--light);
+        }
+
+        .ai-tools.active {
+            display: block;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-light);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 1rem;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--darker);
+        }
+
+        .tool-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* User Dashboard */
+        .user-dashboard {
+            display: none;
+            padding-top: 8rem;
+            min-height: 100vh;
+            background: var(--light);
+        }
+
+        .user-dashboard.active {
+            display: block;
+        }
+
+        /* Admin Login */
+        .admin-login {
+            display: none;
+            padding-top: 8rem;
+            min-height: 100vh;
+            background: var(--light);
+        }
+
+        .admin-login.active {
+            display: block;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding-top: 8rem;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .ai-demo-content {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .cart-container {
+                width: 100%;
+                right: -100%;
+            }
+
+            .form-container {
+                padding: 2rem;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .dashboard-menu {
+                width: 100%;
+                left: -100%;
+            }
+
+            .message {
+                max-width: 90%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo" id="homeLink">
+                <div class="logo-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <span>SynthAI Pro</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#" class="nav-link" id="aboutLink">About</a></li>
+                <li><a href="#" class="nav-link" id="contactLink">Contact</a></li>
+            </ul>
+            <div class="header-actions">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up Free</button>
+                <button class="cart-btn" id="cartToggle">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="btn btn-secondary" id="dashboardBtn" style="display: none;">
+                    <i class="fas fa-th-large"></i>
+                    Dashboard
+                </button>
+                <button class="btn btn-outline" id="logoutBtn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+                <button class="btn btn-outline" id="adminLoginBtn" style="display: none;">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Menu -->
+    <div class="dashboard-menu" id="dashboardMenu">
+        <div class="menu-header">
+            <h3 class="menu-title">Dashboard Menu</h3>
+            <button class="menu-close" id="menuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="menu-user">
+            <div class="user-avatar" id="userAvatar">U</div>
+            <div class="user-info">
+                <h4 id="userName">User Name</h4>
+                <div class="user-role" id="userRole">Free User</div>
+            </div>
+        </div>
+        <div class="menu-nav">
+            <ul>
+                <li><a href="#" class="menu-link active" id="userDashboardLink">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a></li>
+                <li><a href="#" class="menu-link" id="aiToolsLink">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Tools</span>
+                </a></li>
+                <li><a href="#" class="menu-link" id="billingLink">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Billing & Plans</span>
+                </a></li>
+                <li><a href="#" class="menu-link" id="usageLink">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Usage Analytics</span>
+                </a></li>
+                <li><a href="#" class="menu-link" id="settingsLink">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a></li>
+                <li><a href="#" class="menu-link" id="adminMenuLink" style="display: none;">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin Panel</span>
+                </a></li>
+            </ul>
+        </div>
+        <div class="menu-footer">
+            <button class="btn btn-outline" id="menuLogout" style="width: 100%;">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-mask"></div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title fade-in">Advanced AI Solutions for the Modern World</h1>
+                    <p class="hero-subtitle fade-in delay-1">Experience the power of integrated AI agents with natural conversation, image generation, code assistance, and much more. Start with our free plan or upgrade for unlimited access.</p>
+                    <div class="hero-badges fade-in delay-2">
+                        <div class="badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure & Private</span>
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-bolt"></i>
+                            <span>Lightning Fast</span>
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Auto-Updating</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions fade-in delay-2">
+                        <button class="btn btn-primary btn-large" id="startFreeTrialBtn">
+                            <i class="fas fa-rocket"></i>
+                            Start Free Trial
+                        </button>
+                        <button class="btn btn-outline" id="watchDemoBtn">
+                            <i class="fas fa-play-circle"></i>
+                            Watch Demo
+                        </button>
+                    </div>
+                    <div class="hero-stats fade-in delay-3">
+                        <div class="stat">
+                            <div class="stat-value">50K+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">AI Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" id="features">
+            <div class="section-header">
+                <h2 class="section-title">Integrated AI Features</h2>
+                <p class="section-subtitle">Harness the power of multiple AI technologies in one seamless platform</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="feature-title">Natural Conversation</h3>
+                    <p class="feature-description">Engage in human-like conversations with our advanced language model, capable of understanding context and nuance.</p>
+                    <a href="#" class="feature-link" id="conversationLink">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="feature-title">Creative Image Generation</h3>
+                    <p class="feature-description">Transform your ideas into stunning visuals with our state-of-the-art image generation technology.</p>
+                    <a href="#" class="feature-link" id="imageGenLink">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Code Assistance</h3>
+                    <p class="feature-description">Get intelligent code suggestions, debugging help, and autocompletion for multiple programming languages.</p>
+                    <a href="#" class="feature-link" id="codeAssistLink">
+                        <span>Learn More</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Demo Section -->
+        <section class="section">
+            <div class="ai-demo">
+                <div class="ai-demo-content">
+                    <div>
+                        <h2 class="demo-title">Try Robyn - Our AI Assistant</h2>
+                        <p class="demo-description">Experience the power of our conversational AI. Ask Robyn anything and get intelligent, helpful responses in real-time.</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" id="tryRobynBtn">
+                                <i class="fas fa-bolt"></i>
+                                Try Robyn Now
+                            </button>
+                        </div>
+                    </div>
+                    <div class="demo-interface">
+                        <input type="text" class="demo-input" placeholder="Ask Robyn anything...">
+                        <div class="demo-output">
+                            Hello! I'm Robyn, your AI assistant. How can I help you today?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="section pricing" id="pricing">
+            <div class="section-header">
+                <h2 class="section-title">Simple, Transparent Pricing</h2>
+                <p class="section-subtitle">Choose the plan that works best for you and your team</p>
+            </div>
+            <div class="pricing-tabs">
+                <div class="pricing-tab active">Monthly</div>
+                <div class="pricing-tab">Yearly (Save 20%)</div>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card fade-in">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Free</h3>
+                        <p class="pricing-description">Perfect for trying out our AI features</p>
+                    </div>
+                    <div class="pricing-price">
+                        <div class="price-amount">R0</div>
+                        <div class="price-period">per month</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Limited access to all AI features</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>10 AI requests per day</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Basic image generation</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Community support</span>
+                        </li>
+                    </ul>
+                    <div class="pricing-actions">
+                        <button class="btn btn-outline" id="tryRobynFreeBtn">
+                            Try Robyn Free
+                        </button>
+                    </div>
+                </div>
+                <div class="pricing-card popular fade-in delay-1">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Pro</h3>
+                        <p class="pricing-description">For professionals and small teams</p>
+                    </div>
+                    <div class="pricing-price">
+                        <div class="price-amount">R299</div>
+                        <div class="price-period">per month</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Full access to all AI features</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>500 AI requests per month</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Advanced image generation</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <div class="pricing-actions">
+                        <button class="btn btn-primary" data-plan="pro">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="pricing-card fade-in delay-2">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Enterprise</h3>
+                        <p class="pricing-description">For large teams and organizations</p>
+                    </div>
+                    <div class="pricing-price">
+                        <div class="price-amount">R899</div>
+                        <div class="price-period">per month</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Unlimited AI features</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Unlimited requests</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Premium image generation</span>
+                        </li>
+                        <li class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <span>24/7 dedicated support</span>
+                        </li>
+                    </ul>
+                    <div class="pricing-actions">
+                        <button class="btn btn-outline" data-plan="enterprise">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section testimonials" id="testimonials">
+            <div class="section-header">
+                <h2 class="section-title">Loved by Thousands</h2>
+                <p class="section-subtitle">See what our customers are saying about SynthAI</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-content">
+                        <p>SynthAI has completely transformed how we handle customer support. The AI understands context so well that customers often can't tell they're talking to a bot!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <div class="author-role">CTO, TechSolutions</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in delay-1">
+                    <div class="testimonial-content">
+                        <p>The image generation feature alone is worth the subscription. We've saved thousands on design costs while producing higher quality visuals for our marketing.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <div class="author-role">Marketing Director, BrandVision</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in delay-2">
+                    <div class="testimonial-content">
+                        <p>As a developer, the code assistance feature is a game-changer. It's like having a senior developer looking over my shoulder, catching errors and suggesting improvements.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TK</div>
+                        <div class="author-info">
+                            <h4>Thomas Kim</h4>
+                            <div class="author-role">Lead Developer, CodeCraft</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section">
+            <div class="cta">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Transform Your Workflow?</h2>
+                    <p class="cta-description">Join thousands of professionals already using SynthAI to boost productivity and creativity.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large" id="ctaFreeTrialBtn">
+                            <i class="fas fa-rocket"></i>
+                            Start Free Trial
+                        </button>
+                        <button class="btn btn-outline" id="bookDemoBtn">
+                            <i class="fas fa-calendar"></i>
+                            Book a Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- User Dashboard -->
+    <section id="user-dashboard" class="user-dashboard">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">User Dashboard</h1>
+            <p class="dashboard-subtitle">Welcome back! Here's your AI usage overview</p>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-card-value" id="aiRequests">0/10</div>
+                <div class="stat-card-label">AI Requests Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-value" id="planType">Free</div>
+                <div class="stat-card-label">Current Plan</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-value" id="daysLeft">7</div>
+                <div class="stat-card-label">Days Left in Trial</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-value" id="usagePercent">0%</div>
+                <div class="stat-card-label">Monthly Usage</div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-section">
+                <h2 class="dashboard-section-title">
+                    <i class="fas fa-robot"></i>
+                    Quick Access to AI Tools
+                </h2>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" id="chatWithRobynBtn">
+                        <i class="fas fa-comments"></i>
+                        Chat with Robyn
+                    </button>
+                    <button class="btn btn-outline" id="generateImagesBtn">
+                        <i class="fas fa-palette"></i>
+                        Generate Images
+                    </button>
+                    <button class="btn btn-outline" id="codeAssistantBtn">
+                        <i class="fas fa-code"></i>
+                        Code Assistant
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="dashboard-section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Recent Activity
+                </h2>
+                <div class="table-container">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>AI Tool</th>
+                                <th>Usage</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023-10-15</td>
+                                <td>Robyn Chat</td>
+                                <td>5 requests</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>2023-10-14</td>
+                                <td>Image Generator</td>
+                                <td>3 images</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>2023-10-13</td>
+                                <td>Code Assistant</td>
+                                <td>2 requests</td>
+                                <td><span class="status-badge status-active">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section id="ai-tools" class="ai-tools">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">AI Tools</h1>
+            <p class="dashboard-subtitle">Access our full suite of AI-powered tools</p>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="tool-title">Robyn - AI Assistant</h3>
+                <p class="tool-description">Have natural conversations with our advanced AI assistant. Ask questions, get explanations, and brainstorm ideas.</p>
+                <button class="btn btn-primary" id="openRobynChat">
+                    <i class="fas fa-comment"></i>
+                    Start Chat
+                </button>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="tool-title">Image Generator</h3>
+                <p class="tool-description">Transform your ideas into stunning visuals. Generate images from text descriptions in various styles.</p>
+                <button class="btn btn-primary" id="openImageGen">
+                    <i class="fas fa-image"></i>
+                    Create Images
+                </button>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 class="tool-title">Code Assistant</h3>
+                <p class="tool-description">Get intelligent code suggestions, debugging help, and autocompletion for multiple programming languages.</p>
+                <button class="btn btn-primary" id="openCodeAssistant">
+                    <i class="fas fa-terminal"></i>
+                    Write Code
+                </button>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 class="tool-title">Content Creator</h3>
+                <p class="tool-description">Generate marketing copy, blog posts, social media content, and more with our specialized writing AI.</p>
+                <button class="btn btn-primary" id="openContentCreator">
+                    <i class="fas fa-edit"></i>
+                    Create Content
+                </button>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3 class="tool-title">AI Video Creation</h3>
+                <p class="tool-description">Create professional videos with AI avatars and voiceovers without any video editing experience.</p>
+                <button class="btn btn-primary" id="openVideoCreator">
+                    <i class="fas fa-film"></i>
+                    Make Videos
+                </button>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-microphone-alt"></i>
+                </div>
+                <h3 class="tool-title">Voice Generation</h3>
+                <p class="tool-description">Convert text to natural-sounding speech in multiple languages and accents for your projects.</p>
+                <button class="btn btn-primary" id="openVoiceGenerator">
+                    <i class="fas fa-volume-up"></i>
+                    Generate Voice
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Robyn Chat Interface -->
+    <section id="robyn-chat" class="page">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Chat with Robyn</h2>
+                <p class="section-subtitle">Your intelligent AI assistant is ready to help</p>
+            </div>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chat-info">
+                        <h3>Robyn AI Assistant</h3>
+                        <div class="chat-status">
+                            <i class="fas fa-circle"></i>
+                            <span>Online</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message message-bot">
+                        <div class="message-sender">Robyn</div>
+                        <div class="message-content">
+                            Hello! I'm Robyn, your AI assistant. I can help you with a wide variety of tasks including answering questions, generating content, providing explanations, and much more. What would you like to know or create today?
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message here...">
+                    <button class="btn btn-primary" id="sendMessageBtn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="admin-dashboard" class="dashboard">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Admin Dashboard</h1>
+            <p class="dashboard-subtitle">Manage your AI platform and track performance</p>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-card-value">1,254</div>
+                <div class="stat-card-label">Total Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-value">R42,580</div>
+                <div class="stat-card-label">Monthly Revenue</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-value">89%</div>
+                <div class="stat-card-label">Customer Satisfaction</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-value">327</div>
+                <div class="stat-card-label">New Signups</div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="dashboard-section">
+                <h2 class="dashboard-section-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    Recent Orders
+                </h2>
+                <div class="table-container">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ORD-7842</td>
+                                <td>Sarah Johnson</td>
+                                <td>Pro Plan</td>
+                                <td>R299</td>
+                                <td>2023-10-15</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-7841</td>
+                                <td>Michael Rodriguez</td>
+                                <td>Enterprise Plan</td>
+                                <td>R899</td>
+                                <td>2023-10-14</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-7840</td>
+                                <td>Thomas Kim</td>
+                                <td>Pro Plan</td>
+                                <td>R299</td>
+                                <td>2023-10-13</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-7839</td>
+                                <td>Jennifer Lee</td>
+                                <td>Enterprise Plan</td>
+                                <td>R899</td>
+                                <td>2023-10-12</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-7838</td>
+                                <td>David Wilson</td>
+                                <td>Pro Plan</td>
+                                <td>R299</td>
+                                <td>2023-10-11</td>
+                                <td><span class="status-badge status-cancelled">Cancelled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="dashboard-section-title">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics Overview
+                </h2>
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-card-value">5,247</div>
+                        <div class="stat-card-label">AI Requests Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">42.3K</div>
+                        <div class="stat-card-label">AI Requests This Month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">78%</div>
+                        <div class="stat-card-label">Image Generation Usage</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-value">22%</div>
+                        <div class="stat-card-label">Code Assistance Usage</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2 class="dashboard-section-title">
+                    <i class="fas fa-cogs"></i>
+                    Quick Actions
+                </h2>
+                <div class="hero-actions">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Add New User
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-file-invoice"></i>
+                        Generate Reports
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-bell"></i>
+                        Send Notifications
+                    </button>
+                    <button class="btn btn-danger" id="adminLogoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Login -->
+    <section id="admin-login" class="admin-login">
+        <div class="form-container">
+            <h2 class="form-title">Admin Login</h2>
+            <p class="form-subtitle">Access the admin dashboard</p>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminUsername" class="form-label">Username</label>
+                    <input type="text" id="adminUsername" class="form-input" placeholder="Enter admin username" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword" class="form-label">Password</label>
+                    <input type="password" id="adminPassword" class="form-input" placeholder="Enter admin password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login as Admin</button>
+                </div>
+                <div class="form-footer">
+                    <p>Are you a customer? <a href="#" class="form-link" id="backToHome">Back to Home</a></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" id="loginClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="form-container">
+                <h2 class="form-title">Login to Your Account</h2>
+                <p class="form-subtitle">Welcome back! Please enter your details</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail" class="form-label">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    </div>
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#" class="form-link" id="showSignup">Sign up</a></p>
+                        <p style="margin-top: 1rem;"><a href="#" class="form-link" id="showAdminLogin">Admin Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="modal-close" id="signupClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="form-container">
+                <h2 class="form-title">Create Your Account</h2>
+                <p class="form-subtitle">Join thousands of AI enthusiasts today</p>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signupName" class="form-label">Full Name</label>
+                        <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail" class="form-label">Email Address</label>
+                        <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword" class="form-label">Password</label>
+                        <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupConfirm" class="form-label">Confirm Password</label>
+                        <input type="password" id="signupConfirm" class="form-input" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                    </div>
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" class="form-link" id="showLogin">Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>SynthAI Pro</h3>
+                <p>Advanced AI solutions for individuals and businesses. Harness the power of multiple AI technologies in one platform.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Product</h3>
+                <ul class="footer-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#" id="footerUseCases">Use Cases</a></li>
+                    <li><a href="#" id="footerApi">API</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="footerAbout">About Us</a></li>
+                    <li><a href="#" id="footerCareers">Careers</a></li>
+                    <li><a href="#" id="footerBlog">Blog</a></li>
+                    <li><a href="#" id="footerContact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#" id="footerTerms">Terms of Service</a></li>
+                    <li><a href="#" id="footerPrivacy">Privacy Policy</a></li>
+                    <li><a href="#" id="footerCookies">Cookie Policy</a></li>
+                    <li><a href="#" id="footerCompliance">GDPR Compliance</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 SynthAI Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart -->
+    <div class="cart-container" id="cart">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Cart</h3>
+            <button class="cart-close" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">R0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fas fa-lock"></i>
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="notification-content">
+            <div class="notification-title">Item added to cart</div>
+            <div class="notification-message">Your selected plan has been added to your cart</div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const header = document.getElementById('header');
+        const cartToggle = document.getElementById('cartToggle');
+        const closeCart = document.getElementById('closeCart');
+        const cart = document.getElementById('cart');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.querySelector('.cart-count');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const planButtons = document.querySelectorAll('[data-plan]');
+        const notification = document.getElementById('notification');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const loginClose = document.getElementById('loginClose');
+        const signupClose = document.getElementById('signupClose');
+        const showSignup = document.getElementById('showSignup');
+        const showLogin = document.getElementById('showLogin');
+        const startFreeTrialBtn = document.getElementById('startFreeTrialBtn');
+        const ctaFreeTrialBtn = document.getElementById('ctaFreeTrialBtn');
+        const tryRobynBtn = document.getElementById('tryRobynBtn');
+        const tryRobynFreeBtn = document.getElementById('tryRobynFreeBtn');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const dashboardBtn = document.getElementById('dashboardBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminLoginSection = document.getElementById('admin-login');
+        const adminDashboard = document.getElementById('admin-dashboard');
+        const homeSection = document.getElementById('home');
+        const userDashboard = document.getElementById('user-dashboard');
+        const aiTools = document.getElementById('ai-tools');
+        const robynChat = document.getElementById('robyn-chat');
+        const adminLoginForm = document.getElementById('adminLoginForm');
+        const backToHome = document.getElementById('backToHome');
+        const showAdminLogin = document.getElementById('showAdminLogin');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        const dashboardMenu = document.getElementById('dashboardMenu');
+        const menuClose = document.getElementById('menuClose');
+        const menuLogout = document.getElementById('menuLogout');
+        const homeLink = document.getElementById('homeLink');
+        const adminMenuLink = document.getElementById('adminMenuLink');
+        const userAvatar = document.getElementById('userAvatar');
+        const userName = document.getElementById('userName');
+        const userRole = document.getElementById('userRole');
+        const userDashboardLink = document.getElementById('userDashboardLink');
+        const aiToolsLink = document.getElementById('aiToolsLink');
+        const billingLink = document.getElementById('billingLink');
+        const usageLink = document.getElementById('usageLink');
+        const settingsLink = document.getElementById('settingsLink');
+        const pages = document.querySelectorAll('.page, .dashboard, .admin-login, .user-dashboard, .ai-tools');
+        const chatWithRobynBtn = document.getElementById('chatWithRobynBtn');
+        const generateImagesBtn = document.getElementById('generateImagesBtn');
+        const codeAssistantBtn = document.getElementById('codeAssistantBtn');
+        const openRobynChat = document.getElementById('openRobynChat');
+        const openImageGen = document.getElementById('openImageGen');
+        const openCodeAssistant = document.getElementById('openCodeAssistant');
+        const openContentCreator = document.getElementById('openContentCreator');
+        const openVideoCreator = document.getElementById('openVideoCreator');
+        const openVoiceGenerator = document.getElementById('openVoiceGenerator');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const chatMessages = document.getElementById('chatMessages');
+        const watchDemoBtn = document.getElementById('watchDemoBtn');
+        const bookDemoBtn = document.getElementById('bookDemoBtn');
+        const conversationLink = document.getElementById('conversationLink');
+        const imageGenLink = document.getElementById('imageGenLink');
+        const codeAssistLink = document.getElementById('codeAssistLink');
+        const aboutLink = document.getElementById('aboutLink');
+        const contactLink = document.getElementById('contactLink');
+        const footerUseCases = document.getElementById('footerUseCases');
+        const footerApi = document.getElementById('footerApi');
+        const footerAbout = document.getElementById('footerAbout');
+        const footerCareers = document.getElementById('footerCareers');
+        const footerBlog = document.getElementById('footerBlog');
+        const footerContact = document.getElementById('footerContact');
+        const footerTerms = document.getElementById('footerTerms');
+        const footerPrivacy = document.getElementById('footerPrivacy');
+        const footerCookies = document.getElementById('footerCookies');
+        const footerCompliance = document.getElementById('footerCompliance');
+
+        // Cart Data
+        let cartData = [];
+
+        // User data
+        let currentUser = null;
+        let isAdmin = false;
+
+        // Admin credentials
+        const adminCredentials = {
+            username: 'admin',
+            password: 'admin123'
+        };
+
+        // Check if user is logged in
+        function checkLoginStatus() {
+            const user = localStorage.getItem('synthai_user');
+            const admin = localStorage.getItem('synthai_admin');
+            
+            if (user) {
+                currentUser = JSON.parse(user);
+                showUserDashboard();
+            } else if (admin === 'true') {
+                isAdmin = true;
+                showAdminDashboard();
+            }
+        }
+
+        // Show user dashboard
+        function showUserDashboard() {
+            hideAllPages();
+            userDashboard.classList.add('active');
+            dashboardBtn.style.display = 'inline-flex';
+            logoutBtn.style.display = 'inline-flex';
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            adminLoginBtn.style.display = 'none';
+            
+            // Update user info in menu
+            if (currentUser) {
+                userName.textContent = currentUser.name;
+                userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+                userRole.textContent = currentUser.plan === 'premium' ? 'Premium User' : 'Free User';
+            }
+        }
+
+        // Show admin dashboard
+        function showAdminDashboard() {
+            hideAllPages();
+            adminDashboard.classList.add('active');
+            dashboardBtn.style.display = 'inline-flex';
+            logoutBtn.style.display = 'inline-flex';
+            adminLoginBtn.style.display = 'inline-flex';
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            adminMenuLink.style.display = 'block';
+            
+            // Update user info in menu
+            userName.textContent = 'Administrator';
+            userAvatar.textContent = 'A';
+            userRole.textContent = 'System Admin';
+        }
+
+        // Show admin login
+        function showAdminLoginPage() {
+            hideAllPages();
+            adminLoginSection.classList.add('active');
+        }
+
+        // Show home page
+        function showHomePage() {
+            hideAllPages();
+            homeSection.classList.add('active');
+            dashboardBtn.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            adminLoginBtn.style.display = 'none';
+            loginBtn.style.display = 'inline-flex';
+            signupBtn.style.display = 'inline-flex';
+        }
+
+        // Show AI tools
+        function showAITools() {
+            hideAllPages();
+            aiTools.classList.add('active');
+        }
+
+        // Show Robyn chat
+        function showRobynChat() {
+            hideAllPages();
+            robynChat.classList.add('active');
+        }
+
+        // Hide all pages
+        function hideAllPages() {
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            robynChat.classList.remove('active');
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Toggle Cart
+        cartToggle.addEventListener('click', () => {
+            cart.classList.add('active');
+        });
+
+        closeCart.addEventListener('click', () => {
+            cart.classList.remove('active');
+        });
+
+        // Toggle Dashboard Menu
+        dashboardBtn.addEventListener('click', () => {
+            dashboardMenu.classList.add('active');
+        });
+
+        menuClose.addEventListener('click', () => {
+            dashboardMenu.classList.remove('active');
+        });
+
+        // Menu navigation
+        userDashboardLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showUserDashboard();
+            dashboardMenu.classList.remove('active');
+        });
+
+        aiToolsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showAITools();
+            dashboardMenu.classList.remove('active');
+        });
+
+        billingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Billing', 'Billing section would open here');
+            dashboardMenu.classList.remove('active');
+        });
+
+        usageLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Usage Analytics', 'Usage analytics would open here');
+            dashboardMenu.classList.remove('active');
+        });
+
+        settingsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Settings', 'Settings would open here');
+            dashboardMenu.classList.remove('active');
+        });
+
+        adminMenuLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showAdminDashboard();
+            dashboardMenu.classList.remove('active');
+        });
+
+        // Modal Functions
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.add('active');
+        });
+
+        signupBtn.addEventListener('click', () => {
+            signupModal.classList.add('active');
+        });
+
+        startFreeTrialBtn.addEventListener('click', () => {
+            signupModal.classList.add('active');
+        });
+
+        ctaFreeTrialBtn.addEventListener('click', () => {
+            signupModal.classList.add('active');
+        });
+
+        tryRobynBtn.addEventListener('click', () => {
+            if (currentUser || isAdmin) {
+                showRobynChat();
+            } else {
+                signupModal.classList.add('active');
+            }
+        });
+
+        tryRobynFreeBtn.addEventListener('click', () => {
+            if (currentUser || isAdmin) {
+                showRobynChat();
+            } else {
+                signupModal.classList.add('active');
+            }
+        });
+
+        loginClose.addEventListener('click', () => {
+            loginModal.classList.remove('active');
+        });
+
+        signupClose.addEventListener('click', () => {
+            signupModal.classList.remove('active');
+        });
+
+        showSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.remove('active');
+            signupModal.classList.add('active');
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.classList.remove('active');
+            loginModal.classList.add('active');
+        });
+
+        showAdminLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.remove('active');
+            showAdminLoginPage();
+        });
+
+        adminLoginBtn.addEventListener('click', () => {
+            showAdminDashboard();
+        });
+
+        backToHome.addEventListener('click', (e) => {
+            e.preventDefault();
+            showHomePage();
+        });
+
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showHomePage();
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('synthai_user');
+            localStorage.removeItem('synthai_admin');
+            currentUser = null;
+            isAdmin = false;
+            showHomePage();
+            showNotification('Logged Out', 'You have been successfully logged out.');
+        });
+
+        menuLogout.addEventListener('click', () => {
+            localStorage.removeItem('synthai_user');
+            localStorage.removeItem('synthai_admin');
+            currentUser = null;
+            isAdmin = false;
+            showHomePage();
+            dashboardMenu.classList.remove('active');
+            showNotification('Logged Out', 'You have been successfully logged out.');
+        });
+
+        adminLogoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('synthai_admin');
+            isAdmin = false;
+            showHomePage();
+            showNotification('Admin Logged Out', 'You have been successfully logged out.');
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('active');
+            }
+            if (e.target === signupModal) {
+                signupModal.classList.remove('active');
+            }
+        });
+
+        // Form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // In a real app, you would send this to a server
+            // For demo, we'll create a mock user
+            currentUser = {
+                name: 'Demo User',
+                email: email,
+                plan: 'free'
+            };
+            
+            localStorage.setItem('synthai_user', JSON.stringify(currentUser));
+            
+            showNotification('Login Successful', 'Welcome back to SynthAI Pro!');
+            loginModal.classList.remove('active');
+            showUserDashboard();
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+            
+            if (password !== confirm) {
+                showNotification('Error', 'Passwords do not match');
+                return;
+            }
+            
+            // In a real app, you would send this to a server
+            currentUser = {
+                name: name,
+                email: email,
+                plan: 'free'
+            };
+            
+            localStorage.setItem('synthai_user', JSON.stringify(currentUser));
+            
+            showNotification('Account Created', 'Welcome to SynthAI Pro! Your account has been created.');
+            signupModal.classList.remove('active');
+            showUserDashboard();
+        });
+
+        // Admin login form submission
+        adminLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                localStorage.setItem('synthai_admin', 'true');
+                isAdmin = true;
+                showNotification('Admin Login Successful', 'Welcome to the Admin Dashboard!');
+                showAdminDashboard();
+            } else {
+                showNotification('Login Failed', 'Invalid admin credentials. Please try again.');
+            }
+        });
+
+        // AI Tools Navigation
+        chatWithRobynBtn.addEventListener('click', () => {
+            showRobynChat();
+        });
+
+        generateImagesBtn.addEventListener('click', () => {
+            showAITools();
+            showNotification('Image Generator', 'Image generator would open here');
+        });
+
+        codeAssistantBtn.addEventListener('click', () => {
+            showAITools();
+            showNotification('Code Assistant', 'Code assistant would open here');
+        });
+
+        openRobynChat.addEventListener('click', () => {
+            showRobynChat();
+        });
+
+        openImageGen.addEventListener('click', () => {
+            showNotification('Image Generator', 'Image generator would open here');
+        });
+
+        openCodeAssistant.addEventListener('click', () => {
+            showNotification('Code Assistant', 'Code assistant would open here');
+        });
+
+        openContentCreator.addEventListener('click', () => {
+            showNotification('Content Creator', 'Content creator would open here');
+        });
+
+        openVideoCreator.addEventListener('click', () => {
+            showNotification('Video Creator', 'Video creator would open here');
+        });
+
+        openVoiceGenerator.addEventListener('click', () => {
+            showNotification('Voice Generator', 'Voice generator would open here');
+        });
+
+        // Robyn Chat Functionality
+        function addMessage(sender, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${sender}`;
+            
+            const senderDiv = document.createElement('div');
+            senderDiv.className = 'message-sender';
+            senderDiv.textContent = sender === 'user' ? 'You' : 'Robyn';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = message;
+            
+            messageDiv.appendChild(senderDiv);
+            messageDiv.appendChild(contentDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+            
+            addMessage('user', message);
+            chatInput.value = '';
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const responses = [
+                    "I understand your question. Let me think about that...",
+                    "That's an interesting point! Based on my knowledge, I would say...",
+                    "I can help with that! Here's what I know about this topic...",
+                    "Great question! Let me provide some information about that...",
+                    "I appreciate your inquiry. Here's my response based on the available data...",
+                    "I'd be happy to assist with that. Let me share some insights...",
+                    "That's a thoughtful question. Here's what I can tell you about it...",
+                    "I understand what you're asking. Let me provide some helpful information..."
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage('bot', randomResponse);
+            }, 1000 + Math.random() * 2000);
+        }
+
+        sendMessageBtn.addEventListener('click', sendMessage);
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Demo AI interaction
+        const demoInput = document.querySelector('.demo-input');
+        const demoOutput = document.querySelector('.demo-output');
+        
+        if (demoInput && demoOutput) {
+            demoInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const question = demoInput.value.trim();
+                    if (question) {
+                        demoOutput.textContent = "Robyn is thinking...";
+                        
+                        // Simulate AI response after a short delay
+                        setTimeout(() => {
+                            const responses = [
+                                "I understand your question. Based on my knowledge, I would recommend exploring our documentation for more detailed information.",
+                                "That's an interesting question! Our AI capabilities include natural language processing, image generation, and code assistance.",
+                                "I'd be happy to help with that. Our platform integrates multiple AI technologies to provide comprehensive solutions.",
+                                "Great question! Our AI systems are designed to learn and adapt to your specific needs over time.",
+                                "I appreciate your inquiry. Our team is constantly working to improve and expand our AI offerings."
+                            ];
+                            
+                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                            demoOutput.textContent = randomResponse;
+                        }, 1000);
+                    }
+                }
+            });
+        }
+
+        // Navigation Links
+        watchDemoBtn.addEventListener('click', () => {
+            showNotification('Demo', 'Product demo video would play here');
+        });
+
+        bookDemoBtn.addEventListener('click', () => {
+            showNotification('Book Demo', 'Demo booking form would open here');
+        });
+
+        conversationLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentUser || isAdmin) {
+                showRobynChat();
+            } else {
+                signupModal.classList.add('active');
+            }
+        });
+
+        imageGenLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentUser || isAdmin) {
+                showAITools();
+                showNotification('Image Generator', 'Image generator would open here');
+            } else {
+                signupModal.classList.add('active');
+            }
+        });
+
+        codeAssistLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentUser || isAdmin) {
+                showAITools();
+                showNotification('Code Assistant', 'Code assistant would open here');
+            } else {
+                signupModal.classList.add('active');
+            }
+        });
+
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('About Us', 'About page would open here');
+        });
+
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Contact', 'Contact form would open here');
+        });
+
+        // Footer Links
+        footerUseCases.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Use Cases', 'Use cases page would open here');
+        });
+
+        footerApi.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('API', 'API documentation would open here');
+        });
+
+        footerAbout.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('About Us', 'About page would open here');
+        });
+
+        footerCareers.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Careers', 'Careers page would open here');
+        });
+
+        footerBlog.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Blog', 'Blog would open here');
+        });
+
+        footerContact.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Contact', 'Contact form would open here');
+        });
+
+        footerTerms.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Terms of Service', 'Terms of service would open here');
+        });
+
+        footerPrivacy.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Privacy Policy', 'Privacy policy would open here');
+        });
+
+        footerCookies.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('Cookie Policy', 'Cookie policy would open here');
+        });
+
+        footerCompliance.addEventListener('click', (e) => {
+            e.preventDefault();
+            showNotification('GDPR Compliance', 'GDPR compliance information would open here');
+        });
+
+        // Plan selection
+        planButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const plan = button.getAttribute('data-plan');
+                let price = 0;
+                let name = '';
+                
+                switch(plan) {
+                    case 'free':
+                        price = 0;
+                        name = 'Free Plan';
+                        break;
+                    case 'pro':
+                        price = 299;
+                        name = 'Pro Plan';
+                        break;
+                    case 'enterprise':
+                        price = 899;
+                        name = 'Enterprise Plan';
+                        break;
+                }
+                
+                // Check if item already in cart
+                const existingItemIndex = cartData.findIndex(item => item.plan === plan);
+                
+                if (existingItemIndex !== -1) {
+                    // Item already in cart, show message
+                    showNotification('Plan already in cart', 'This plan is already in your shopping cart');
+                    return;
+                }
+                
+                // Add to cart
+                cartData.push({
+                    plan: plan,
+                    name: name,
+                    price: price
+                });
+                
+                updateCart();
+                showNotification('Added to cart', `${name} has been added to your cart`);
+                
+                // Auto-open cart if it's not the free plan
+                if (plan !== 'free') {
+                    cart.classList.add('active');
+                }
+            });
+        });
+
+        // Update cart display
+        function updateCart() {
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            // Update cart count
+            cartCount.textContent = cartData.length;
+            
+            // Calculate total
+            let total = 0;
+            
+            // Add items to cart
+            cartData.forEach((item, index) => {
+                total += item.price;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-price">R${item.price}</div>
+                    </div>
+                    <button class="remove-item" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total
+            cartTotal.textContent = `R${total}.00`;
+            
+            // Add event listeners to remove buttons
+            const removeButtons = document.querySelectorAll('.remove-item');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = parseInt(e.currentTarget.getAttribute('data-index'));
+                    const removedItem = cartData[index];
+                    cartData.splice(index, 1);
+                    updateCart();
+                    showNotification('Item removed', `${removedItem.name} has been removed from your cart`);
+                });
+            });
+        }
+
+        // Checkout process
+        checkoutBtn.addEventListener('click', () => {
+            if (cartData.length === 0) {
+                showNotification('Cart is empty', 'Please add items to your cart before checkout');
+                return;
+            }
+            
+            // In a real implementation, this would redirect to payment gateway
+            showNotification('Redirecting to payment', 'You will be redirected to our secure payment gateway');
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                showNotification('Payment successful', 'Thank you for your purchase! Your account will be upgraded shortly.');
+                cartData = [];
+                updateCart();
+                cart.classList.remove('active');
+                
+                // If user is logged in, upgrade their account
+                if (currentUser) {
+                    currentUser.plan = 'premium';
+                    localStorage.setItem('synthai_user', JSON.stringify(currentUser));
+                    userRole.textContent = 'Premium User';
+                }
+            }, 2000);
+        });
+
+        // Show notification
+        function showNotification(title, message) {
+            const notificationTitle = notification.querySelector('.notification-title');
+            const notificationMessage = notification.querySelector('.notification-message');
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            notification.classList.add('active');
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Fade in elements on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check
+        fadeInOnScroll();
+
+        // Check login status on page load
+        checkLoginStatus();
+    </script>
+</body>
+</html>
